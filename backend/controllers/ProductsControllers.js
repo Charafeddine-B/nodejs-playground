@@ -39,15 +39,29 @@ exports.getProductbyid = async (req, res) => {
 }
 
 //-----------update--------------------------------
-exports.updateProduct = async (req, res) =>{
+exports.updateProduct = async (req, res) => {
     const update_Product = await product.updateOne(
-        { _id:req.params.id },
+        { _id: req.params.id },
         {
-            $set:req.body
+            $set: req.body
         }
-)
+    )
     res.status(200).json({
         success: true,
         message: 'product a été modifié',
-        update_Product})
+        update_Product
+    })
+}
+
+//--------deleteProduct
+
+exports.deleteProduct = async (req, res) => {
+    const delete_Product = await product.deleteOne({
+        _id: req.params.id
+    })
+    res.status(200).json({
+        success: true,
+        message: 'product a été supprimé',
+        delete_Product
+    })
 }
